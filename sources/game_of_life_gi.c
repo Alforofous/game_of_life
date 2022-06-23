@@ -6,11 +6,31 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 15:14:38 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:20:57 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_of_life.h"
+
+static void	destroy_images(t_utils *utils, t_img *images)
+{
+	while (images)
+	{
+		mlx_destroy_image(utils->mlx, images->ptr);
+		images->ptr = NULL;
+		images = images->next;
+	}
+}
+
+void	close_prog(t_utils *utils, char *exit_msg, int exit_code)
+{
+	if (utils->win && exit_code > -2)
+		mlx_destroy_window(utils->mlx, utils->win);
+	if (utils->img.ptr && exit_code > -2)
+		destroy_images(utils, &utils->img);
+	printf("%s\n",exit_msg);
+	exit(exit_code);
+}
 
 static u_int8_t	**get_map(FILE *file, size_t line_len, size_t lines)
 {
@@ -81,30 +101,55 @@ static FILE	*open_file(char *path)
 	return (file);
 }
 
-static void	close_prog(char *exit_msg, int exit_code)
+static void	crt_img(t_utils *utils, t_img *img, t_4i *d, void (*f)(t_utils *u))
 {
-	perror(exit_msg);
-	exit(exit_code);
+	img->dim.width = d->a;
+	img->dim.height = d->b;
+	img->dim.x0 = d->c;
+	img->dim.y0 = d->d;
+	img->dim.x1 = d->c + img->dim.width;
+	img->dim.y1 = d->d + img->dim.height;
+	img->next = NULL;
+	img->draw_func = f;
+	img->ptr = mlx_new_image(utils->mlx, d->a, d->b);
+	if (!img->ptr)
+		close_prog(utils, "Failed to create an image...", -1);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+}
+
+static void	open_screen(t_utils *utils)
+{
+	utils->mlx = mlx_init();
+	if (!utils->mlx)
+		close_prog(utils, "Failed to connect software to display...", -2);
+	utils->win = mlx_new_window(utils->mlx, SCREEN_X, SCREEN_Y, "RTv1");
+	if (!utils->win)
+		close_prog(utils, "Failed to open window...", -2);
+	crt_img(utils, &utils->img, &(t_4i){SCREEN_X, SCREEN_Y,
+		0, 0}, &draw_image1);
+	init_hooks(utils);
 }
 
 int	main(int argc, char **argv)
 {
-	FILE	*file;
-	size_t	line_len;
-	size_t	lines;
-	u_int8_t	**map;
+	FILE		*file;
+	t_utils		utils;
 
-	if (argc != 3)
-		close_prog("Usage: <filename> [iterations]\nERROR", 1);
+	if (argc != 2)
+		close_prog(&utils, "Usage: <filename>", -3);
 	file = open_file(argv[1]);
 	if (file == NULL)
-		close_prog("ERROR", 1);
-	if (get_map_params(file, &line_len, &lines) == -1)
-		close_prog("ERROR", 1);
-	map = get_map(file, line_len, lines);
-	if (map == NULL)
-		close_prog("ERROR", 1);
-	iterate_map(map, line_len, lines, atol(argv[2]));
+		close_prog(&utils, "ERROR", -2);
+	if (get_map_params(file, &utils.line_len, &utils.lines) == -1)
+		close_prog(&utils, "ERROR", -2);
+	utils.map = get_map(file, utils.line_len, utils.lines);
+	if (utils.map == NULL)
+		close_prog(&utils, "ERROR", -2);
+	init(&utils);
+	open_screen(&utils);
+	render_screen(&utils);
+	mlx_loop(utils.mlx);
 	fclose(file);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 15:14:29 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:30:36 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static FILE	*open_file(char *path)
 	return (file);
 }
 
-static void	close_prog(char *exit_msg, int exit_code)
+static void	close_progr(char *exit_msg, int exit_code)
 {
 	perror(exit_msg);
 	exit(exit_code);
@@ -95,15 +95,15 @@ int	main(int argc, char **argv)
 	u_int8_t	**map;
 
 	if (argc != 3)
-		close_prog("Usage: <filename> [iterations]\nERROR", 1);
+		close_progr("Usage: <filename> [iterations]\nERROR", 1);
 	file = open_file(argv[1]);
 	if (file == NULL)
-		close_prog("ERROR", 1);
+		close_progr("ERROR", 1);
 	if (get_map_params(file, &line_len, &lines) == -1)
-		close_prog("ERROR", 1);
+		close_progr("ERROR", 1);
 	map = get_map(file, line_len, lines);
 	if (map == NULL)
-		close_prog("ERROR", 1);
+		close_progr("ERROR", 1);
 	iterate_map(map, line_len, lines, atol(argv[2]));
 	print_map(map, line_len, lines);
 	fclose(file);
