@@ -6,7 +6,7 @@
 #    By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/22 16:59:05 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/06/23 11:23:59 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ BOLD = \033[1m
 
 NAME =		life
 CC =		gcc
-FLAGS =		-Wall -Wextra -Werror -Wconversion -fsanitize=address
+FLAGS =		-Wall -Wextra -Werror -Wconversion -g -fsanitize=address
 LNX_FLAGS = -Wall -Wextra -Werror -Wconversion
 
 UNAME = $(shell uname)
@@ -37,7 +37,9 @@ HEADERS_LIST =	game_of_life.h
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./sources/
-SOURCES_LIST =	game_of_life.c
+SOURCES_LIST =	game_of_life.c\
+				iterate.c\
+				map.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objects/
