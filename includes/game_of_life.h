@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 14:26:24 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:14:42 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void	print_map(uint8_t **map, size_t line_len, size_t lines);
-void	iterate_map(uint8_t **map, size_t line_len, size_t lines, long iters);
+void	print_map(u_int8_t **map, size_t line_len, size_t lines);
+void	iterate_map(u_int8_t **map, size_t line_len, size_t lines, long iters);
 
 #endif

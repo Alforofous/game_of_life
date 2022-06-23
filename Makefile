@@ -6,7 +6,7 @@
 #    By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/23 15:04:35 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/06/23 15:11:57 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
 
 $(NAME_GI): $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI)
-	@$(CC) $(FLAGS) $(LIBS) $(INCLUDES) $(OBJECTS_GI) -o $(NAME)
+	@$(CC) $(FLAGS) $(LIBS) $(INCLUDES) $(OBJECTS_GI) -o $(NAME_GI)
 	@echo "Compiled $(BOLD)$(NAME_GI)$(RESET)!\n"
 
 $(OBJECTS_GI_DIRECTORY):
@@ -96,6 +96,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)\n"
+	@rm -f $(NAME_GI)
+	@echo "$(NAME_GI): $(RED)$(NAME) was deleted$(RESET)\n"
 
 re:
 	@make fclean
