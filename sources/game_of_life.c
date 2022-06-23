@@ -6,27 +6,27 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 14:25:43 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:14:29 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_of_life.h"
 
-static uint8_t	**get_map(FILE *file, size_t line_len, size_t lines)
+static u_int8_t	**get_map(FILE *file, size_t line_len, size_t lines)
 {
 	size_t	i;
 	size_t	j;
 	char	c;
 	size_t	ret;
-	uint8_t	**map;
+	u_int8_t	**map;
 
-	map = (uint8_t **)malloc(sizeof(uint8_t *) * lines);
+	map = (u_int8_t **)malloc(sizeof(u_int8_t *) * lines);
 	if (!map)
 		return (NULL);
 	i = 0;
 	while (i < lines)
 	{
-		map[i] = (uint8_t *)malloc(sizeof(uint8_t) * line_len);
+		map[i] = (u_int8_t *)malloc(sizeof(u_int8_t) * line_len);
 		if (!map[i])
 			return (NULL);
 		i++;
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	FILE	*file;
 	size_t	line_len;
 	size_t	lines;
-	uint8_t	**map;
+	u_int8_t	**map;
 
 	if (argc != 3)
 		close_prog("Usage: <filename> [iterations]\nERROR", 1);
