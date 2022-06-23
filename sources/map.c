@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:21:42 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 11:35:01 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:44:52 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	print_map(uint8_t **map, size_t line_len, size_t lines)
 		j = 0;
 		while (j < line_len)
 		{
-			if ((map[i][j] & 1) == 0)
-				printf("|\033[31m%u\033[0m|", map[i][j]);
+			if ((map[i][j] & 1) == 1)
+				printf("x");
 			else
-				printf("|%u|", map[i][j]);
+				printf(".");
 			j++;
 		}
 		printf("\n");

@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 11:34:50 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:25:43 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int	main(int argc, char **argv)
 	map = get_map(file, line_len, lines);
 	if (map == NULL)
 		close_prog("ERROR", 1);
+	iterate_map(map, line_len, lines, atol(argv[2]));
 	print_map(map, line_len, lines);
-	iterate_map(map, line_len, lines, atoi(argv[2]));
 	fclose(file);
 	return (0);
 }

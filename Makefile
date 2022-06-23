@@ -6,7 +6,7 @@
 #    By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/23 11:23:59 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/06/23 11:45:19 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 
 $(OBJECTS_DIRECTORY):
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(YELLOW)$(OBJECTS_DIRECTORY) was created$(RESET)"
+	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
