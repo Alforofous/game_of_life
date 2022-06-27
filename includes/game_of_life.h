@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_of_life.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 20:00:33 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/27 23:07:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GAME_OF_LIFE_H
 
 # include "mlx.h"
-# include "dm_2d.h"
+# include "../dm_2d/includes/dm_2d.h"
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
