@@ -80,16 +80,25 @@ $ ./life_gi states/fullscreen.txt
 ## examples from Wikipedia
 
 Pulsar
+
 ![](https://upload.wikimedia.org/wikipedia/commons/0/07/Game_of_life_pulsar.gif)
 
+
 Penta-decathlon
+
 ![](https://upload.wikimedia.org/wikipedia/commons/f/fb/I-Column.gif)
 
+
 Glider
+
 ![](https://upload.wikimedia.org/wikipedia/commons/f/f2/Game_of_life_animated_glider.gif)
 
+
 Light-weight spaceship
+
 ![](https://upload.wikimedia.org/wikipedia/commons/3/37/Game_of_life_animated_LWSS.gif)
 
+
 Heavy-weight spaceship
+
 ![](https://upload.wikimedia.org/wikipedia/commons/4/4f/Animated_Hwss.gif)
