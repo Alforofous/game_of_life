@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_of_life.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 16:15:08 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:34:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <stdint.h>
 # define SCREEN_X 2560
 # define SCREEN_Y 1440
 

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   game_of_life.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 16:01:39 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:35:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_of_life.h"
 
-static u_int8_t	**get_map(FILE *file, size_t line_len, size_t lines)
+static uint8_t	**get_map(FILE *file, size_t line_len, size_t lines)
 {
 	size_t	i;
 	size_t	j;
 	char	c;
 	size_t	ret;
-	u_int8_t	**map;
+	uint8_t	**map;
 
-	map = (u_int8_t **)malloc(sizeof(u_int8_t *) * lines);
+	map = (uint8_t **)malloc(sizeof(uint8_t *) * lines);
 	if (!map)
 		return (NULL);
 	i = 0;
 	while (i < lines)
 	{
-		map[i] = (u_int8_t *)malloc(sizeof(u_int8_t) * line_len);
+		map[i] = (uint8_t *)malloc(sizeof(uint8_t) * line_len);
 		if (!map[i])
 			return (NULL);
 		i++;
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	FILE	*file;
 	size_t	line_len;
 	size_t	lines;
-	u_int8_t	**map;
+	uint8_t	**map;
 
 	if (argc != 3)
 		close_progr("Usage: <filename> [iterations]\nERROR", 1);

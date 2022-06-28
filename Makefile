@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahaavist <ahaavist@student.hive.fi>        +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/23 21:06:03 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/06/28 15:29:09 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME =		life
 NAME_SLOW =	life_slow
 NAME_GI =	life_gi
 CC =		gcc
-FLAGS =		-Wall -Wextra -Werror -Wconversion
+FLAGS =		-Wall -Wextra -Wconversion
 FLAGS +=	-O3
 FLAGS +=	-flto
 
