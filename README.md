@@ -85,17 +85,17 @@ Pulsar
 
 Penta-decathlon
 
-![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:I-Column.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/f/fb/I-Column.gif)
 
 Glider
 
-![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Game_of_life_animated_glider.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/f/f2/Game_of_life_animated_glider.gif)
 
 Light-weight spaceship
 
-![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Game_of_life_animated_LWSS.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/3/37/Game_of_life_animated_LWSS.gif)
 
 Heavy-weight spaceship
 
-![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Animated_Hwss.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/4/4f/Animated_Hwss.gif)
 
