@@ -59,14 +59,14 @@ $ ./life_gi states/tests/big_map
 
 Usage:
 ```
-$ ./life_gi states/tests/dinnertable
+$ ./life_gi states/dinnertable
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/dinnertable.gif)
 
 Usage:
 ```
-$ ./life_gi states/tests/fullscreen.txt
+$ ./life_gi states/fullscreen.txt
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/fullscreen.gif)
