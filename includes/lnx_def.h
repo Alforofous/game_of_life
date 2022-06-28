@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lnx_def.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <dmalesev@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:45:05 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 15:53:01 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:19:13 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ enum e_keys
 	DOT = 46,
 	T = 116,
 	RIGHT_BUTTON = 4,
+	R = 10,
 	SPACE = 32
 };
 

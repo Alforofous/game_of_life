@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterate.c                                          :+:      :+:    :+:   */
+/*   iterate_slow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaavist <ahaavist@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:19:07 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 20:34:28 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:36:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_of_life.h"
 
-static void	next_free_neighbor(u_int8_t *nbr)
+static void	next_free_neighbor(uint8_t *nbr)
 {
-	u_int8_t	bit;
+	uint8_t	bit;
 
 	if ((*nbr & 30) == 30)
 		return ;
@@ -24,7 +24,7 @@ static void	next_free_neighbor(u_int8_t *nbr)
 	*nbr |= bit;
 }
 
-static void	add_neighbors(u_int8_t **map, size_t line_len, size_t lines)
+static void	add_neighbors(uint8_t **map, size_t line_len, size_t lines)
 {
 	size_t	i;
 	size_t	j;
@@ -60,7 +60,7 @@ static void	add_neighbors(u_int8_t **map, size_t line_len, size_t lines)
 	}
 }
 
-static void	next_cycle(u_int8_t **map, size_t line_len, size_t lines)
+static void	next_cycle(uint8_t **map, size_t line_len, size_t lines)
 {
 	size_t	i;
 	size_t	j;
@@ -81,7 +81,7 @@ static void	next_cycle(u_int8_t **map, size_t line_len, size_t lines)
 	}
 }
 
-void	iterate_map(u_int8_t **map, size_t line_len, size_t lines, long iters)
+void	iterate_map(uint8_t **map, size_t line_len, size_t lines, long iters)
 {
 	long	i;
 	int		result;

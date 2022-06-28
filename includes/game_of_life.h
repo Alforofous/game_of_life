@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_of_life.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 16:15:08 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:37:55 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <stdint.h>
 # define SCREEN_X 2560
 # define SCREEN_Y 1440
 
@@ -72,7 +73,7 @@ typedef struct s_utils
 	int			state;
 	int			pause;
 	int			slider_button;
-	u_int8_t	**map;
+	uint8_t	**map;
 	size_t		line_len;
 	size_t		lines;
 	t_mouse		mouse;
@@ -90,9 +91,9 @@ typedef struct s_4i
 }				t_4i;
 
 /*GOL functions*/
-void	print_map(u_int8_t **map, size_t line_len, size_t lines);
-void	iterate_map(u_int8_t **map, size_t line_len, size_t lines, long iters);
-void	iterate_gi_map(u_int8_t **map, size_t line_len, size_t lines);
+void	print_map(uint8_t **map, size_t line_len, size_t lines);
+void	iterate_map(uint8_t **map, size_t line_len, size_t lines, long iters);
+void	iterate_gi_map(uint8_t **map, size_t line_len, size_t lines);
 void	close_prog(t_utils *utils, char *exit_msg, int exit_code);
 /*Mlx draw image functions*/
 void	draw_image1(t_utils *utils);
@@ -124,6 +125,6 @@ void	ft_pixel_put(int x, int y, int color, void *param);
 /*Help functions*/
 int		int_to_bit(int nbr);
 int		coords_in_img(t_img *img, int x, int y);
-void	translate_pixels_to_coords(t_utils *utils, int x, int y, u_int8_t set);
+void	translate_pixels_to_coords(t_utils *utils, int x, int y, uint8_t set);
 
 #endif

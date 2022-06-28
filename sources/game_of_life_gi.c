@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_of_life.c                                     :+:      :+:    :+:   */
+/*   game_of_life_gi.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 16:04:51 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:29:53 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	close_prog(t_utils *utils, char *exit_msg, int exit_code)
 	exit(exit_code);
 }
 
-static u_int8_t	**get_map(FILE *file, size_t line_len, size_t lines)
+static uint8_t	**get_map(FILE *file, size_t line_len, size_t lines)
 {
 	size_t	i;
 	size_t	j;
 	char	c;
 	size_t	ret;
-	u_int8_t	**map;
+	uint8_t	**map;
 
-	map = (u_int8_t **)malloc(sizeof(u_int8_t *) * lines);
+	map = (uint8_t **)malloc(sizeof(uint8_t *) * lines);
 	if (!map)
 		return (NULL);
 	i = 0;
 	while (i < lines)
 	{
-		map[i] = (u_int8_t *)malloc(sizeof(u_int8_t) * line_len);
+		map[i] = (uint8_t *)malloc(sizeof(uint8_t) * line_len);
 		if (!map[i])
 			return (NULL);
 		i++;
@@ -84,7 +84,7 @@ static int	get_map_params(FILE *file, size_t *line_len, size_t *lines)
 	line = (char *)malloc(sizeof(char) * file_len);
 	if (!line)
 		return (-1);
-	fgets(line, (int)file_len, file);
+	line = fgets(line, (int)file_len, file);
 	*line_len = strlen(line);
 	free(line);
 	*lines = file_len / *line_len;
