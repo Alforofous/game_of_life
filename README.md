@@ -75,3 +75,9 @@ $ ./life_gi states/fullscreen.txt
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/fullscreen.gif)
+
+
+# example from Wikipedia
+
+![](https://upload.wikimedia.org/wikipedia/commons/0/07/Game_of_life_pulsar.gif)
+
