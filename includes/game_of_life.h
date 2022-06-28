@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 15:37:55 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/06/28 18:10:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdint.h>
-# define SCREEN_X 2560
-# define SCREEN_Y 1440
+# define SCREEN_X 1440
+# define SCREEN_Y 900
 
 # if __APPLE__
 #  include "mac_def.h"

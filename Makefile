@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/28 17:28:11 by mrantil          ###   ########.fr        #
+#    Updated: 2022/06/28 18:08:08 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ ifeq ($(UNAME), Darwin)
 LIBS =	-lmlx -framework AppKit -framework OpenGL $(DM_2D)
 endif
 ifeq ($(UNAME), Linux)
-LIBS =	-O -lmlx_Linux -lXext -lX11 -lm $(DM_2D)
+LIBS =	-O -lXext -lX11 -lm ./minilibx/libmlx_Linux.a $(DM_2D)
 endif
 
 DM_2D_DIRECTORY = ./dm_2d/
@@ -97,8 +97,8 @@ $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
 
-$(NAME_GI): $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI) $(DM_2D)
-	@$(CC) $(FLAGS) $(LIBS) $(INCLUDES) $(OBJECTS_GI) -o $(NAME_GI)
+$(NAME_GI): $(DM_2D) $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI)
+	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_GI) $(LIBS) -o $(NAME_GI)
 	@echo "Compiled $(BOLD)$(NAME_GI)$(RESET)!\n"
 
 slow: $(NAME_SLOW)
@@ -123,7 +123,7 @@ $(OBJECTS_DIRECTORY_SLOW)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
 
 $(OBJECTS_GI_DIRECTORY)%.o : $(SOURCES_GI_DIRECTORY)%.c $(HEADERS)
-	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_GI_OBJECT)
+	@$(CC) $(FLAGS) $(LIBS) -c $(INCLUDES) $< -o $@ $(ASSERT_GI_OBJECT)
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
