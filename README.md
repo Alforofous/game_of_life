@@ -41,7 +41,6 @@ e.g.
 the last locations of the cells after 1000 iterations will be printed out.
 
 # GUI Bonus
-(you can draw with the mouse on the maps!)
 
 Usage:
 ```
@@ -51,6 +50,7 @@ $ ./life_gi states/tests/diehard
 'r' = reset
 'esc' = exit
 'space' = pause
+(you can draw with the mouse on the maps!)
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/diehard.gif)
