@@ -1,7 +1,7 @@
 # Game of Life
 
 In this project, we will implement [Conways's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), and
-attempt to make your implementation as fast as possible
+attempt to make the implementation as fast as possible
 
 The Game of Life, also known simply as Life, is a cellular automaton
 devised by the British mathematician John Horton Conway in 1970. It
@@ -18,8 +18,11 @@ possible states, live or dead. Every cell interacts with its eight
 neighbors, which are the cells that are horizontally, vertically, or
 diagonally adjacent. At each step in time, the following transitions
 occur:
+
 • Any live cell with two or three live neighbors survives.
+
 • Any dead cell with three live neighbors becomes a live cell.
+
 • All other live cells die in the next generation. Similarly, all
 other dead cells stay dead.
 (Source: Wikipedia)
@@ -41,7 +44,7 @@ $ ./life states/tests/diehard 1000
 the last locations of the cells after 1000 iterations will be printed out.
 
 ## Optimization
-Our biggest optimization was to stop the iteration if you notices that the same patters repeat themselfs. There is a pattern called Blinkers with just two different patterns that will repeat and many maps gets to that point after a while. We check that with the help of bitwise operations and will turn on specific bits to check if the cell is alive or dead and was the previous stas was. We also use it for knowing what the upcomming state will be when we check the neibours of the alive cells. (look at the file game_of_life/sources/iterate_opti.c that file and game_of_life/sources/game_of_life.c does all the action)
+Our biggest optimization was to stop the iteration if we notice that the same patterns repeat themselves. There is a pattern called Blinkers with just two different patterns that will repeat and many maps get to that point after a while. We check that with the help of bitwise operations and will turn on specific bits to check if the cell is alive or dead and what the previous stage was. We also use it for knowing what the upcoming state will be when we check the neibours of the alive cells. (look at the file game_of_life/sources/iterate_opti.c that file and game_of_life/sources/game_of_life.c does all the action)
 The file game_of_life/sources/iterate_slow.c will have less operations and will be faster on maps that will continue to the end of the iterations you ask for. To compile that use:
 ```
 $ make slow
