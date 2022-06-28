@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_mouse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 13:24:07 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 10:41:14 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:33:11 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	translate_pixels_to_coords(t_utils *utils, int x, int y, u_int8_t set)
 	y_scale = (float)utils->lines / (float)utils->img.dim.height;
 	x -= utils->img.dim.x0;
 	y -= utils->img.dim.y0;
-	x *= x_scale;
-	y *= y_scale;
+	x = (int)((float)x * x_scale);
+	y = (int)((float)y * y_scale);
 	utils->map[y][x] = set;
 	render_screen(utils);
 }

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:19:07 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 15:35:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/06/28 17:29:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 static void	next_free_neighbor(uint8_t *nbr)
 {
 	uint8_t	bit;
-
+	
 	if ((*nbr & 30) == 30)
 		return ;
 	bit = 2;
 	while ((*nbr & bit) == bit)
-		bit <<= 1;
+		bit = (uint8_t)(bit << 1);
 	*nbr |= bit;
 }
 

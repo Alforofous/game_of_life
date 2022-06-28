@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 15:36:12 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/06/28 17:29:53 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	get_map_params(FILE *file, size_t *line_len, size_t *lines)
 	line = (char *)malloc(sizeof(char) * file_len);
 	if (!line)
 		return (-1);
-	fgets(line, (int)file_len, file);
+	line = fgets(line, (int)file_len, file);
 	*line_len = strlen(line);
 	free(line);
 	*lines = file_len / *line_len;
