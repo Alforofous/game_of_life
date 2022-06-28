@@ -81,12 +81,16 @@ $ ./life_gi states/fullscreen.txt
 
 Pulsar
 ![](https://upload.wikimedia.org/wikipedia/commons/0/07/Game_of_life_pulsar.gif)
+
 Penta-decathlon
 ![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:I-Column.gif)
+
 Glider
 ![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Game_of_life_animated_glider.gif)
+
 Light-weight spaceship
 ![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Game_of_life_animated_LWSS.gif)
+
 Heavy-weight spaceship
 ![](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Animated_Hwss.gif)
 
