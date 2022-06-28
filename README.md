@@ -20,6 +20,20 @@ $ ./life_gi states/diehard
 
 Usage:
 ```
+$ ./life_gi states/big_map
+```
+
+![](https://github.com/maxrantil/game_of_life/blob/main/gifs/big_map.gif)
+
+Usage:
+```
+$ ./life_gi states/dinnertable
+```
+
+![](https://github.com/maxrantil/game_of_life/blob/main/gifs/dinnertable.gif)
+
+Usage:
+```
 $ ./life_gi states/fullscreen.txt
 ```
 
