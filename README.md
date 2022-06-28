@@ -45,21 +45,21 @@ the last locations of the cells after 1000 iterations will be printed out.
 
 Usage:
 ```
-$ ./life_gi states/tests//diehard
+$ ./life_gi states/tests/diehard
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/diehard.gif)
 
 Usage:
 ```
-$ ./life_gi states/tests/big_map
+$ ./life_gi states/big_map
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/big_map.gif)
 
 Usage:
 ```
-$ ./life_gi states/dinnertable
+$ ./life_gi states/tests/dinnertable
 ```
 
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/dinnertable.gif)
