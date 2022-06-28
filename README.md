@@ -9,4 +9,5 @@ Usage:
 ```
 ./life_gi states/fullscreen.txt
 ```
+## gif
 ![](https://github.com/maxrantil/game_of_life/gifs/fullscreen.gif)
