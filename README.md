@@ -40,7 +40,8 @@ e.g.
 ```
 the last locations of the cells after 1000 iterations will be printed out.
 
-
+## Optimization
+Our biggest optimization was to stop the iteration if you notices that the same patters repeat themselfs. There is a pattern called Blinkers with just two different patterns that will repeat and many maps gets to that point after a while. We check that with the help of bitwise operations and will turn on specific bits to check if the cell is alive or dead and was the previous stas was. We also use it for knowing what the upcomming state will be when we check the neibours of the alive cells. (look at the file game_of_life/sources/iterate_opti.c that file and game_of_life/sources/game_of_life.c does all the action)
 
 # GUI Bonus
 
