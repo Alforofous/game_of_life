@@ -1,6 +1,7 @@
 # game_of_life
 
-A program that is based on [Conways's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+"In this rush, you will implement [Conways's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), and
+attempt to make your implementation as fast as possible"
 
 
 To make the program just run the Makefile
