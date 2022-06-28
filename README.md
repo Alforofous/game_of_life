@@ -40,6 +40,8 @@ e.g.
 ```
 the last locations of the cells after 1000 iterations will be printed out.
 
+
+
 # GUI Bonus
 
 Usage:
