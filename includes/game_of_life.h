@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 20:00:33 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:15:08 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_utils
 	int			tick;
 	int			speed;
 	int			state;
+	int			pause;
 	int			slider_button;
 	u_int8_t	**map;
 	size_t		line_len;
@@ -123,6 +124,6 @@ void	ft_pixel_put(int x, int y, int color, void *param);
 /*Help functions*/
 int		int_to_bit(int nbr);
 int		coords_in_img(t_img *img, int x, int y);
-void	translate_pixels_to_coords(t_utils *utils, int x, int y, int color, u_int8_t set);
+void	translate_pixels_to_coords(t_utils *utils, int x, int y, u_int8_t set);
 
 #endif

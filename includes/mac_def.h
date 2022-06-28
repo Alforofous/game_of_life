@@ -6,7 +6,7 @@
 /*   By: dmalesev <dmalesev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:42:22 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 15:52:53 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:47:21 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ enum e_keys
 	D = 2,
 	W = 13,
 	NUM_PLUS = 69,
-	NUM_MINUS = 78
+	NUM_MINUS = 78,
+	R = 15
 };
 
 #endif
