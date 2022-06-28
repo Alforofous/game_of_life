@@ -48,6 +48,10 @@ Usage:
 $ ./life_gi states/tests/diehard
 ```
 
+'r' = reset
+'esc' = exit
+'space' = pause
+
 ![](https://github.com/maxrantil/game_of_life/blob/main/gifs/diehard.gif)
 
 Usage:
