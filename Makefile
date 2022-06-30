@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/30 14:12:37 by mrantil          ###   ########.fr        #
+#    Updated: 2022/06/30 14:56:33 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,12 @@ RED = \033[31m
 CYAN = \033[36m
 BOLD = \033[1m
 
-NAME =		life
-NAME_SLOW =	life_slow
+#PRINTING TOOLS
+ERASE_LINE = \033[K
+MOVE_CURSOR_UP = \033[A
+
+NAME =		life_opti
+NAME_SLOW =	life
 NAME_GI =	life_gi
 CC =		gcc
 FLAGS =		-Wall -Werror -Wextra -Wconversion
@@ -49,12 +53,14 @@ SOURCES_LIST_SLOW =	game_of_life.c\
 					iterate_slow.c\
 					map.c
 SOURCES_SLOW = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST_SLOW))
+SOURCE_COUNT_SLOW = $(words $(SOURCES_LIST_SLOW))
 
 SOURCES_DIRECTORY = ./sources/
 SOURCES_LIST =	game_of_life.c\
 				iterate_opti.c\
 				map.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
+SOURCE_COUNT = $(words $(SOURCES_LIST))
 
 SOURCES_GI_DIRECTORY = ./sources/
 SOURCES_GI_LIST =	game_of_life_gi.c\
@@ -71,12 +77,13 @@ SOURCES_GI_LIST =	game_of_life_gi.c\
 					hooks.c\
 					map.c
 SOURCES_GI = $(addprefix $(SOURCES_GI_DIRECTORY), $(SOURCES_GI_LIST))
+SOURCE_GI_COUNT = $(words $(SOURCES_GI_LIST))
 
-OBJECTS_DIRECTORY = objects/
+OBJECTS_DIRECTORY = objects_opti/
 OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
 OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
-OBJECTS_DIRECTORY_SLOW = objects_slow/
+OBJECTS_DIRECTORY_SLOW = objects/
 OBJECTS_LIST_SLOW = $(patsubst %.c, %.o, $(SOURCES_LIST_SLOW))
 OBJECTS_SLOW	= $(addprefix $(OBJECTS_DIRECTORY_SLOW), $(OBJECTS_LIST_SLOW))
 
@@ -86,48 +93,57 @@ OBJECTS_GI	= $(addprefix $(OBJECTS_GI_DIRECTORY), $(OBJECTS_GI_LIST))
 
 INCLUDES = -I$(HEADERS_DIRECTORY) -I./minilibx/ -I$(DM_2D_HEADERS)
 
-ASSERT_OBJECT = && echo "$@ $(GREEN)$(BOLD) ✔$(RESET)" || echo "$@ $(RED)$(BOLD)✘$(RESET)"
-ASSERT_GI_OBJECT = && echo "$@ $(VIOLET)$(BOLD) ✔$(RESET)" || echo "$@ $(RED)$(BOLD)✘$(RESET)"
+ASSERT_SLOW_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(YELLOW)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(GREEN)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
+ASSERT_GI_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(VIOLET)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
 
 all: $(NAME) $(NAME_GI)
-
-$(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
-	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
-	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
 
 $(NAME_GI): $(DM_2D) $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_GI) $(LIBS) -o $(NAME_GI)
 	@echo "Compiled $(BOLD)$(NAME_GI)$(RESET)!\n"
 
-slow: $(NAME_SLOW)
-
-$(NAME_SLOW): $(OBJECTS_DIRECTORY_SLOW) $(OBJECTS_SLOW)
+$(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_DIRECTORY_SLOW) $(OBJECTS_SLOW)
+	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
+	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_SLOW) -o $(NAME_SLOW)
 	@echo "Compiled $(BOLD)$(NAME_SLOW)$(RESET)!\n"
 
 $(OBJECTS_DIRECTORY_SLOW):
+	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY_SLOW)
-	@echo "$(NAME_SLOW): $(VIOLET)$(OBJECTS_DIRECTORY_SLOW) was created$(RESET)"
+	@echo "$(NAME_SLOW): $(VIOLET)$(OBJECTS_DIRECTORY_SLOW) was created$(RESET)\n\n"
 
 $(OBJECTS_GI_DIRECTORY):
+	@stty -echo
 	@mkdir -p $(OBJECTS_GI_DIRECTORY)
-	@echo "$(NAME): $(VIOLET)$(OBJECTS_GI_DIRECTORY) was created$(RESET)"
+	@echo "$(NAME): $(VIOLET)$(OBJECTS_GI_DIRECTORY) was created$(RESET)\n\n"
 
 $(OBJECTS_DIRECTORY):
+	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
+	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)\n\n"
 
 $(OBJECTS_DIRECTORY_SLOW)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
-	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
+	@printf "$(MOVE_CURSOR_UP)"
+	@printf "$(MOVE_CURSOR_UP)"
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_SLOW_OBJECT)
+	@make pbar_slow
 
 $(OBJECTS_GI_DIRECTORY)%.o : $(SOURCES_GI_DIRECTORY)%.c $(HEADERS)
+	@printf "$(MOVE_CURSOR_UP)"
+	@printf "$(MOVE_CURSOR_UP)"
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_GI_OBJECT)
+	@make pbar_gi
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
+	@printf "$(MOVE_CURSOR_UP)"
+	@printf "$(MOVE_CURSOR_UP)"
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
+	@make pbar
 
 $(DM_2D):
-	@echo "$(NAME): $(CYAN)Creating $(DM_2D)...$(RESET)"
+	@echo "$(NAME): $(CYAN)Creating $(DM_2D)...$(RESET)\n"
 	@make -C $(DM_2D_DIRECTORY)
 
 clean:
@@ -152,8 +168,38 @@ fclean: clean
 	@rm -f $(NAME_GI)
 	@echo "$(NAME_GI): $(RED)$(NAME) was deleted$(RESET)\n"
 
-re:
-	@make fclean
-	@make all
+re: fclean all
 
-_.PHONY: all clean fclean re
+pbar_slow:
+	$(eval LOADED_COUNT_SLOW = $(words $(wildcard $(OBJECTS_DIRECTORY_SLOW)*.o)))
+	@for ((i = 1; i <= $(LOADED_COUNT_SLOW); i++)); do\
+		printf "$(YELLOW)█$(RESET)" ;\
+	done ;
+	@for ((i = 1; i <= $(SOURCE_COUNT_SLOW) - $(LOADED_COUNT_SLOW); i++)); do\
+		printf "█" ;\
+	done ;\
+	printf "\n"
+
+pbar_gi:
+	$(eval LOADED_GI_COUNT = $(words $(wildcard $(OBJECTS_GI_DIRECTORY)*.o)))
+	@for ((i = 1; i <= $(LOADED_GI_COUNT); i++)); do\
+		printf "$(VIOLET)█$(RESET)" ;\
+	done ;
+	@for ((i = 1; i <= $(SOURCE_GI_COUNT) - $(LOADED_GI_COUNT); i++)); do\
+		printf "█" ;\
+	done ;\
+	printf "\n"
+
+
+pbar:
+	$(eval LOADED_COUNT = $(words $(wildcard $(OBJECTS_DIRECTORY)*.o)))
+	@for ((i = 1; i <= $(LOADED_COUNT); i++)); do\
+		printf "$(GREEN)█$(RESET)" ;\
+	done ;
+	@for ((i = 1; i <= $(SOURCE_COUNT) - $(LOADED_COUNT); i++)); do\
+		printf "█" ;\
+	done ;\
+	printf "\n"
+
+
+.PHONY: all clean fclean re
