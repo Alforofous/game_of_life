@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/30 13:16:21 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/06/30 14:12:03 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,12 @@ FLAGS =		-Wall -Werror -Wextra -Wconversion
 FLAGS +=	-O3
 FLAGS +=	-flto
 
-LNX_FLAGS = -Wall -Wextra -Werror -Wconversion
-
 UNAME = $(shell uname)
 ifeq ($(UNAME), Darwin)
 LIBS =	-lmlx -framework AppKit -framework OpenGL $(DM_2D)
 endif
 ifeq ($(UNAME), Linux)
-LIBS =	-O -lXext -lX11 -lm -lmlx_Linux $(DM_2D)
+LIBS =	-O -lXext -lX11 -lm ./minilibx/libmlx_Linux.a $(DM_2D)
 endif
 
 DM_2D_DIRECTORY = ./dm_2d/
