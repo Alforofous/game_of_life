@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:19:07 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 15:36:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/06/30 11:27:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	next_free_neighbor(uint8_t *nbr)
 		return ;
 	bit = 2;
 	while ((*nbr & bit) == bit)
-		bit <<= 1;
+		bit = (uint8_t)(bit << 1);
 	*nbr |= bit;
 }
 
@@ -84,9 +84,7 @@ static void	next_cycle(uint8_t **map, size_t line_len, size_t lines)
 void	iterate_map(uint8_t **map, size_t line_len, size_t lines, long iters)
 {
 	long	i;
-	int		result;
 
-	result = 0;
 	i = 0;
 	while (i < iters)
 	{

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:19:07 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 17:29:05 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/06/30 11:26:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	iterate_map(uint8_t **map, size_t line_len, size_t lines, long iters)
 	{
 		add_neighbors(map, line_len, lines);
 		result = next_cycle(map, line_len, lines);
-		if (result == 1 || (result == 2 && !((iters - i) & 1)))
+		if (result == 1 || (result == 2 && !((iters - i - 1) & 1)))
 			i = iters;
 		i++;
 	}
