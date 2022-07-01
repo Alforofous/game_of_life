@@ -6,11 +6,12 @@
 #    By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 09:10:41 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/30 14:34:28 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/01 15:54:09 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #COLORS
+SHELL := /bin/bash
 GREEN = \033[0;32m
 VIOLET = \033[0;35m
 RED = \033[0;31m
@@ -50,20 +51,21 @@ OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 INCLUDES = $(HEADERS_DIRECTORY)
 
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(CYAN)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf '$@ $(CYAN)$(BOLD) ✔$(RESET)\n' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
-	@echo "$(NAME): $(CYAN)object files were created.$(RESET)"
-	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
+	@printf "$(NAME): $(CYAN)object files were created.$(RESET)\n"
+	@printf "Compiled $(BOLD)$(NAME)$(RESET)!\n\n"
+	@stty echo
 
 $(OBJECTS_DIRECTORY):
 	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(CYAN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n"
+	@printf "$(NAME): $(CYAN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n\n"
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@printf "$(MOVE_CURSOR_UP)"
@@ -73,12 +75,12 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 
 clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) directory was deleted.$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted.$(RESET)\n"
+	@printf "$(NAME): $(RED)$(OBJECTS_DIRECTORY) directory was deleted.$(RESET)\n"
+	@printf "$(NAME): $(RED)object files were deleted.$(RESET)\n\n"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted.$(RESET)\n"
+	@printf "$(NAME): $(RED)$(NAME) was deleted.$(RESET)\n\n"
 
 re: fclean all
 

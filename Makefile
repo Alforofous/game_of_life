@@ -6,11 +6,12 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/06/30 14:56:33 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/01 16:05:49 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #COLORS
+SHELL := /bin/bash
 GREEN = \033[32m
 YELLOW = \033[33m
 VIOLET = \033[0;35m
@@ -22,6 +23,7 @@ BOLD = \033[1m
 #PRINTING TOOLS
 ERASE_LINE = \033[K
 MOVE_CURSOR_UP = \033[A
+MAKEFLAGS += --no-print-directory
 
 NAME =		life_opti
 NAME_SLOW =	life
@@ -93,36 +95,38 @@ OBJECTS_GI	= $(addprefix $(OBJECTS_GI_DIRECTORY), $(OBJECTS_GI_LIST))
 
 INCLUDES = -I$(HEADERS_DIRECTORY) -I./minilibx/ -I$(DM_2D_HEADERS)
 
-ASSERT_SLOW_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(YELLOW)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(GREEN)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
-ASSERT_GI_OBJECT = && printf "$(ERASE_LINE)" && echo '$@ $(VIOLET)$(BOLD) ✔$(RESET)' || echo '$@ $(RED)$(BOLD)✘$(RESET)'
+ASSERT_SLOW_OBJECT = && printf '$(ERASE_LINE)' && printf '$@ $(YELLOW)$(BOLD) ✔$(RESET)\n' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
+ASSERT_OBJECT = && printf '$(ERASE_LINE)' && printf '$@ $(GREEN)$(BOLD) ✔$(RESET)\n' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
+ASSERT_GI_OBJECT = && printf '$(ERASE_LINE)' && printf '$@ $(VIOLET)$(BOLD) ✔$(RESET)\n' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
 
 all: $(NAME) $(NAME_GI)
 
 $(NAME_GI): $(DM_2D) $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_GI) $(LIBS) -o $(NAME_GI)
-	@echo "Compiled $(BOLD)$(NAME_GI)$(RESET)!\n"
+	@printf "Compiled $(BOLD)$(NAME_GI)$(RESET)!\n\n"
+	@stty echo
 
 $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_DIRECTORY_SLOW) $(OBJECTS_SLOW)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
-	@echo "Compiled $(BOLD)$(NAME)$(RESET)!\n"
+	@printf "Compiled $(BOLD)$(NAME)$(RESET)!\n\n"
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_SLOW) -o $(NAME_SLOW)
-	@echo "Compiled $(BOLD)$(NAME_SLOW)$(RESET)!\n"
+	@printf "Compiled $(BOLD)$(NAME_SLOW)$(RESET)!\n\n"
+	@stty echo
 
 $(OBJECTS_DIRECTORY_SLOW):
 	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY_SLOW)
-	@echo "$(NAME_SLOW): $(VIOLET)$(OBJECTS_DIRECTORY_SLOW) was created$(RESET)\n\n"
+	@printf "$(NAME_SLOW): $(VIOLET)$(OBJECTS_DIRECTORY_SLOW) was created$(RESET)\n\n\n"
 
 $(OBJECTS_GI_DIRECTORY):
 	@stty -echo
 	@mkdir -p $(OBJECTS_GI_DIRECTORY)
-	@echo "$(NAME): $(VIOLET)$(OBJECTS_GI_DIRECTORY) was created$(RESET)\n\n"
+	@printf "$(NAME): $(VIOLET)$(OBJECTS_GI_DIRECTORY) was created$(RESET)\n\n\n"
 
 $(OBJECTS_DIRECTORY):
 	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)\n\n"
+	@printf "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)\n\n\n"
 
 $(OBJECTS_DIRECTORY_SLOW)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@printf "$(MOVE_CURSOR_UP)"
@@ -143,7 +147,7 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@make pbar
 
 $(DM_2D):
-	@echo "$(NAME): $(CYAN)Creating $(DM_2D)...$(RESET)\n"
+	@printf "$(NAME): $(CYAN)Creating $(DM_2D)...$(RESET)\n\n"
 	@make -C $(DM_2D_DIRECTORY)
 
 clean:
@@ -151,29 +155,29 @@ clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
 	@rm -rf $(OBJECTS_GI_DIRECTORY)
 	@make -C $(DM_2D_DIRECTORY) clean
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
-	@echo "$(NAME_GI): $(RED)$(OBJECTS_GI_DIRECTORY) was deleted$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)\n"
-	@echo "$(NAME_SLOW): $(RED)$(OBJECTS_DIRECTORY_SLOW) was deleted$(RESET)"
-	@echo "$(NAME_SLOW): $(RED)object files were deleted$(RESET)\n"
-	@echo "$(NAME_GI): $(RED)object_gi files were deleted$(RESET)\n"
+	@printf '$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)\n'
+	@printf '$(NAME_GI): $(RED)$(OBJECTS_GI_DIRECTORY) was deleted$(RESET)\n'
+	@printf '$(NAME): $(RED)object files were deleted$(RESET)\n\n'
+	@printf '$(NAME_SLOW): $(RED)$(OBJECTS_DIRECTORY_SLOW) was deleted$(RESET)\n'
+	@printf '$(NAME_SLOW): $(RED)object files were deleted$(RESET)\n\n'
+	@printf '$(NAME_GI): $(RED)object_gi files were deleted$(RESET)\n\n'
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)\n"
+	@printf '$(NAME): $(RED)$(NAME) was deleted$(RESET)\n\n'
 	@rm -f $(NAME_SLOW)
-	@echo "$(NAME_SLOW): $(RED)$(NAME) was deleted$(RESET)\n"
+	@printf '$(NAME_SLOW): $(RED)$(NAME) was deleted$(RESET)\n\n'
 	@rm -f $(DM_2D)
-	@echo "$(NAME): $(RED)$(DM_2D) was deleted$(RESET)\n"
+	@printf '$(NAME): $(RED)$(DM_2D) was deleted$(RESET)\n\n'
 	@rm -f $(NAME_GI)
-	@echo "$(NAME_GI): $(RED)$(NAME) was deleted$(RESET)\n"
+	@printf '$(NAME_GI): $(RED)$(NAME) was deleted$(RESET)\n\n'
 
 re: fclean all
 
 pbar_slow:
 	$(eval LOADED_COUNT_SLOW = $(words $(wildcard $(OBJECTS_DIRECTORY_SLOW)*.o)))
 	@for ((i = 1; i <= $(LOADED_COUNT_SLOW); i++)); do\
-		printf "$(YELLOW)█$(RESET)" ;\
+		printf '$(YELLOW)█$(RESET)' ;\
 	done ;
 	@for ((i = 1; i <= $(SOURCE_COUNT_SLOW) - $(LOADED_COUNT_SLOW); i++)); do\
 		printf "█" ;\
