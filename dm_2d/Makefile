@@ -6,12 +6,16 @@
 #    By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 09:10:41 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/01 15:54:09 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/02 09:50:12 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #COLORS
-SHELL := /bin/bash
+GREEN_BACKGROUND = \033[42m
+WHITE_BACKGROUND = \033[47m
+VIOLET_BACKGROUND = \033[0;45m
+YELLOW_BACKGROUND = \033[0;43m
+CYAN_BACKGROUND = \033[0;46m
 GREEN = \033[0;32m
 VIOLET = \033[0;35m
 RED = \033[0;31m
@@ -21,8 +25,14 @@ CYAN = \033[36m
 
 #PRINTING TOOLS
 ERASE_LINE = \033[K
-MOVE_CURSOR_UP = \033[A
+UP = A
+DOWN = B
+RIGHT = C
+LEFT = D
+MOVE = \033[
 
+SHELL := /bin/bash
+MAKEFLAGS += --no-print-directory
 NAME = dm_2d.a
 GCC_FLAGS = -Wall -Wextra -Werror -Wconversion
 CC = gcc
@@ -44,6 +54,7 @@ SOURCES_LIST =	draw_line.c\
 				seperate_rgb.c\
 				abs.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
+SOURCE_COUNT = $(words $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objects/
 OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
@@ -51,25 +62,24 @@ OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 INCLUDES = $(HEADERS_DIRECTORY)
 
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf '$@ $(CYAN)$(BOLD) ✔$(RESET)\n' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf '$@ $(CYAN)$(BOLD) ✔$(RESET)' || printf '$@ $(RED)$(BOLD)✘$(RESET)\n'
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
-	@printf "$(NAME): $(CYAN)object files were created.$(RESET)\n"
 	@printf "Compiled $(BOLD)$(NAME)$(RESET)!\n\n"
 	@stty echo
 
 $(OBJECTS_DIRECTORY):
 	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@printf "$(NAME): $(CYAN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n\n"
+	@printf "$(CYAN)_________________________________________________________________\n$(RESET)"
+	@printf "$(NAME): $(CYAN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n"
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
-	@printf "$(MOVE_CURSOR_UP)"
-	@printf "$(MOVE_CURSOR_UP)"
+	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(FLAGS) -c -I$(INCLUDES) $< -o $@ $(ASSERT_OBJECT)
 	@make pbar
 
@@ -86,12 +96,13 @@ re: fclean all
 
 pbar:
 	$(eval LOADED_COUNT = $(words $(wildcard $(OBJECTS_DIRECTORY)*.o)))
-	@for ((i = 1; i <= $(LOADED_COUNT); i++)); do\
-		printf "$(CYAN)█$(RESET)" ;\
+	@printf "\r$(MOVE)76$(RIGHT)Files compiled [$(BOLD)$(CYAN)$(LOADED_COUNT)$(RESET) / $(BOLD)$(CYAN)$(SOURCE_COUNT)$(RESET)]\n"
+	@for ((i = 1; i <= $(LOADED_COUNT) * 100 / $(SOURCE_COUNT); i++)); do\
+		printf "$(CYAN_BACKGROUND) $(RESET)" ;\
 	done ;
-	@for ((i = 1; i <= $(SOURCE_COUNT) - $(LOADED_COUNT); i++)); do\
-		printf "█" ;\
-	done ;\
-	printf "\n"
+	@for ((i = 1; i <= 100 - ($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)); i++)); do\
+		printf "$(WHITE_BACKGROUND) $(RESET)" ;\
+	done ;
+	@printf "$(CYAN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 .PHONY: all clean fclean re
