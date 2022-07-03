@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/03 15:47:37 by mrantil          ###   ########.fr        #
+#    Updated: 2022/07/03 15:56:12 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,20 +169,20 @@ clean:
 	@rm -rf $(OBJECTS_DIRECTORY_SLOW)
 	@rm -rf $(OBJECTS_DIRECTORY)
 	@rm -rf $(OBJECTS_GI_DIRECTORY)
+	@printf "$(NAME_SLOW):		$(RED)$(OBJECTS_DIRECTORY_SLOW) was deleted$(RESET)\n"
+	@printf "$(NAME):	$(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)\n"
+	@printf "$(NAME_GI):	$(RED)$(OBJECTS_GI_DIRECTORY) was deleted$(RESET)\n"
 	@make -C $(DM_2D_DIRECTORY) clean
-	@printf "$(NAME_SLOW): $(RED)$(OBJECTS_DIRECTORY_SLOW) and object files was deleted$(RESET)\n"
-	@printf "$(NAME): $(RED)$(OBJECTS_DIRECTORY) and object_opti files was deleted$(RESET)\n"
-	@printf "$(NAME_GI): $(RED)$(OBJECTS_GI_DIRECTORY) and object_gi files was deleted$(RESET)\n"
 
 fclean: clean
 	@rm -f $(NAME_SLOW)
-	@printf "$(NAME_SLOW): $(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME_SLOW):		$(RED)binary was deleted$(RESET)\n"
 	@rm -f $(NAME)
-	@printf "$(NAME): $(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME):	$(RED)binary was deleted$(RESET)\n"
 	@rm -f $(NAME_GI)
-	@printf "$(NAME_GI): $(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME_GI):	$(RED)binary was deleted$(RESET)\n"
 	@rm -f $(DM_2D)
-	@printf "dm_2d: $(RED)$(DM_2D) was deleted$(RESET)\n"
+	@printf "dm_2d:		$(RED)$(DM_2D) was deleted$(RESET)\n"
 
 re: fclean all
 

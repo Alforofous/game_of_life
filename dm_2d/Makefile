@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 09:10:41 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/03 15:47:21 by mrantil          ###   ########.fr        #
+#    Updated: 2022/07/03 15:54:46 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,11 +85,11 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 
 clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@printf "dm_2d: $(RED)$(OBJECTS_DIRECTORY) and object files were deleted.$(RESET)\n"
+	@printf "dm_2d:		$(RED)$(OBJECTS_DIRECTORY) were deleted.$(RESET)\n"
 
 fclean: clean
 	@rm -f $(NAME)
-	@printf "$(NAME): $(RED)$(NAME) was deleted.$(RESET)\n\n"
+	@printf "$(NAME):	$(RED)$(NAME) was deleted.$(RESET)\n\n"
 
 re: fclean all
 
