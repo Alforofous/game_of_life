@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/04 10:36:26 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/04 11:21:10 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ RIGHT = C
 LEFT = D
 MOVE = \033[
 
+#FORBID KEYBOARD INTERACT
+$(shell stty -echo)
+
 MAKEFLAGS += --no-print-directory
 SHELL := /bin/bash
 
@@ -53,8 +56,9 @@ ifeq ($(UNAME), Linux)
 LIBS =	-O -lXext -lX11 -lm ./minilibx/libmlx.a $(DM_2D)
 endif
 
+DM_2D_NAME = dm_2d.a
 DM_2D_DIRECTORY = ./dm_2d/
-DM_2D = $(DM_2D_DIRECTORY)dm_2d.a
+DM_2D = $(DM_2D_DIRECTORY)$(DM_2D_NAME)
 DM_2D_HEADERS = $(DM_2D_DIRECTORY)includes/
 
 HEADERS_DIRECTORY = ./includes/
@@ -116,32 +120,26 @@ all: $(NAME_SLOW) $(NAME) $(NAME_GI)
 $(NAME_GI): $(DM_2D) $(OBJECTS_GI_DIRECTORY) $(OBJECTS_GI)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_GI) $(LIBS) -o $(NAME_GI)
 	@printf "Compiled $(BOLD)$(VIOLET)$(NAME_GI)$(RESET)!\n\n"
-	@stty echo
 
 $(NAME): $(DM_2D) $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
-	@stty echo
 
 $(NAME_SLOW): $(DM_2D) $(OBJECTS_DIRECTORY_SLOW) $(OBJECTS_SLOW)
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS_SLOW) -o $(NAME_SLOW)
 	@printf "Compiled $(BOLD)$(YELLOW)$(NAME_SLOW)$(RESET)!\n\n"
-	@stty echo
 
 $(OBJECTS_DIRECTORY_SLOW):
-	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY_SLOW)
 	@printf "$(YELLOW)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME_SLOW): $(YELLOW)$(OBJECTS_DIRECTORY_SLOW) directory was created.$(RESET)\n\n\n"
 
 $(OBJECTS_GI_DIRECTORY):
-	@stty -echo
 	@mkdir -p $(OBJECTS_GI_DIRECTORY)
 	@printf "$(VIOLET)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME_GI): $(VIOLET)$(OBJECTS_GI_DIRECTORY) directory was created.$(RESET)\n\n\n"
 
 $(OBJECTS_DIRECTORY):
-	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n"
@@ -162,27 +160,30 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 	@make pbar
 
 $(DM_2D):
-	@printf "$(NAME): $(CYAN)Creating $(DM_2D)...$(RESET)\n\n"
 	@make -C $(DM_2D_DIRECTORY)
 
 clean:
+	@printf "$(BOLD)Directories deleted:$(RESET)\n"
 	@rm -rf $(OBJECTS_DIRECTORY_SLOW)
 	@rm -rf $(OBJECTS_DIRECTORY)
 	@rm -rf $(OBJECTS_GI_DIRECTORY)
-	@printf "$(NAME_SLOW):		$(RED)$(OBJECTS_DIRECTORY_SLOW) was deleted$(RESET)\n"
-	@printf "$(NAME):	$(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)\n"
-	@printf "$(NAME_GI):	$(RED)$(OBJECTS_GI_DIRECTORY) was deleted$(RESET)\n"
+	@printf "$(NAME_SLOW): \r$(MOVE)20$(RIGHT)$(BOLD)$(YELLOW)$(OBJECTS_DIRECTORY_SLOW)$(RESET)\n"
+	@printf "$(NAME): \r$(MOVE)20$(RIGHT)$(BOLD)$(GREEN)$(OBJECTS_DIRECTORY)$(RESET)\n"
+	@printf "$(NAME_GI): \r$(MOVE)20$(RIGHT)$(BOLD)$(VIOLET)$(OBJECTS_GI_DIRECTORY)$(RESET)\n"
 	@make -C $(DM_2D_DIRECTORY) clean
+	@printf "\n"
 
 fclean: clean
+	@printf "$(BOLD)Binaries deleted:$(RESET)\n"
 	@rm -f $(NAME_SLOW)
-	@printf "$(NAME_SLOW):		$(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME_SLOW): \r$(MOVE)20$(RIGHT)$(BOLD)$(YELLOW)$(NAME_SLOW)$(RESET)\n"
 	@rm -f $(NAME)
-	@printf "$(NAME):	$(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME): \r$(MOVE)20$(RIGHT)$(BOLD)$(GREEN)$(NAME)$(RESET)\n"
 	@rm -f $(NAME_GI)
-	@printf "$(NAME_GI):	$(RED)binary was deleted$(RESET)\n"
+	@printf "$(NAME_GI): \r$(MOVE)20$(RIGHT)$(BOLD)$(VIOLET)$(NAME_GI)$(RESET)\n"
 	@rm -f $(DM_2D)
-	@printf "dm_2d:		$(RED)$(DM_2D) was deleted$(RESET)\n"
+	@printf "$(DM_2D_NAME): \r$(MOVE)20$(RIGHT)$(BOLD)$(CYAN)$(DM_2D_NAME)$(RESET)\n"
+	@printf "\n"
 
 re: fclean all
 
@@ -220,3 +221,6 @@ pbar:
 	@printf "$(GREEN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)55$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT))).$$(($(LOADED_COUNT) * 1000 / $(SOURCE_COUNT) % 10))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 .PHONY: all clean fclean re
+
+#ALLOW KEYBOARD INTERACT
+$(shell stty echo)

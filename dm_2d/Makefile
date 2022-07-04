@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 09:10:41 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/04 10:36:11 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/04 11:15:39 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,10 +70,8 @@ $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
 	@printf "Compiled $(BOLD)$(CYAN)$(NAME)$(RESET)!\n\n"
-	@stty echo
 
 $(OBJECTS_DIRECTORY):
-	@stty -echo
 	@mkdir -p $(OBJECTS_DIRECTORY)
 	@printf "$(CYAN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(CYAN)$(OBJECTS_DIRECTORY) directory was created.$(RESET)\n\n\n"
@@ -85,11 +83,11 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 
 clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@printf "dm_2d:		$(RED)$(OBJECTS_DIRECTORY) were deleted.$(RESET)\n"
+	@printf "$(NAME): \r$(MOVE)20$(RIGHT)$(BOLD)$(CYAN)$(OBJECTS_DIRECTORY)$(RESET)\n"
 
 fclean: clean
 	@rm -f $(NAME)
-	@printf "$(NAME):	$(RED)$(NAME) was deleted.$(RESET)\n\n"
+	@printf "$(BOLD)$(CYAN)$(NAME)$(RESET)\n"
 
 re: fclean all
 
