@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/03 15:56:12 by mrantil          ###   ########.fr        #
+#    Updated: 2022/07/04 10:36:26 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,7 +195,7 @@ pbar_slow:
 	@for ((i = 1; i <= 100 - ($(LOADED_COUNT_SLOW) * 100 / $(SOURCE_COUNT_SLOW)); i++)); do\
 		printf "$(WHITE_BACKGROUND) $(RESET)" ;\
 	done ;
-	@printf "$(YELLOW_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_COUNT_SLOW) * 100 / $(SOURCE_COUNT_SLOW)))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
+	@printf "$(YELLOW_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)55$(LEFT)[$$(($(LOADED_COUNT_SLOW) * 100 / $(SOURCE_COUNT_SLOW))).$$(($(LOADED_COUNT_SLOW) * 1000 / $(SOURCE_COUNT_SLOW) % 10))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 pbar_gi:
 	$(eval LOADED_GI_COUNT = $(words $(wildcard $(OBJECTS_GI_DIRECTORY)*.o)))
@@ -204,9 +204,9 @@ pbar_gi:
 		printf "$(VIOLET_BACKGROUND) $(RESET)" ;\
 	done ;
 	@for ((i = 1; i <= 100 - ($(LOADED_GI_COUNT) * 100 / $(SOURCE_GI_COUNT)); i++)); do\
-		printf "$(WHITE_BACKGROUND) $(RESET)" ;\
+		printf "$(WHITE_BACKGROUND)$(VIOLET) $(RESET)" ;\
 	done ;
-	@printf "$(VIOLET_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_GI_COUNT) * 100 / $(SOURCE_GI_COUNT)))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
+	@printf "$(VIOLET_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)55$(LEFT)[$$(($(LOADED_GI_COUNT) * 100 / $(SOURCE_GI_COUNT))).$$(($(LOADED_GI_COUNT) * 1000 / $(SOURCE_GI_COUNT) % 10))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 pbar:
 	$(eval LOADED_COUNT = $(words $(wildcard $(OBJECTS_DIRECTORY)*.o)))
@@ -217,6 +217,6 @@ pbar:
 	@for ((i = 1; i <= 100 - ($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)); i++)); do\
 		printf "$(WHITE_BACKGROUND) $(RESET)" ;\
 	done ;
-	@printf "$(GREEN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
+	@printf "$(GREEN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)55$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT))).$$(($(LOADED_COUNT) * 1000 / $(SOURCE_COUNT) % 10))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 .PHONY: all clean fclean re

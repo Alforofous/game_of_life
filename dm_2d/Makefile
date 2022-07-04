@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 09:10:41 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/03 15:54:46 by mrantil          ###   ########.fr        #
+#    Updated: 2022/07/04 10:36:11 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
-	@printf "Compiled $(BOLD)$(NAME)$(RESET)!\n\n"
+	@printf "Compiled $(BOLD)$(CYAN)$(NAME)$(RESET)!\n\n"
 	@stty echo
 
 $(OBJECTS_DIRECTORY):
@@ -102,6 +102,6 @@ pbar:
 	@for ((i = 1; i <= 100 - ($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)); i++)); do\
 		printf "$(WHITE_BACKGROUND) $(RESET)" ;\
 	done ;
-	@printf "$(CYAN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT)))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
+	@printf "$(CYAN_BACKGROUND)$(BOLD)$(WHITE)$(MOVE)54$(LEFT)[$$(($(LOADED_COUNT) * 100 / $(SOURCE_COUNT))).$$(($(LOADED_COUNT) * 1000 / $(SOURCE_COUNT) % 10))%%]$(MOVE)54$(RIGHT)$(RESET)\n"
 
 .PHONY: all clean fclean re
