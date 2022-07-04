@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:45:05 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 17:19:13 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/07/04 11:38:54 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 enum e_keys
 {
+	LEFT_BUTTON = 1,
+	RIGHT_BUTTON = 4,
 	ARROW_LEFT = 123,
 	ARROW_UP = 124,
 	ARROW_RIGHT = 125,
@@ -22,8 +24,7 @@ enum e_keys
 	ESC = 65307,
 	DOT = 46,
 	T = 116,
-	RIGHT_BUTTON = 4,
-	R = 10,
+	R = 114,
 	SPACE = 32
 };
 

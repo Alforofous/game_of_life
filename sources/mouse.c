@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 10:49:27 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/23 19:56:30 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 11:33:01 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	mouse_up(int button, int x, int y, void *param)
 
 	utils = param;
 	button = int_to_bit(button);
-	if ((utils->mouse.button & 1) == 1)
+	if ((utils->mouse.button & LEFT_BUTTON) == LEFT_BUTTON)
 		left_button_up(utils, x, y);
-	if ((utils->mouse.button & 2) == 2)
+	if ((utils->mouse.button & RIGHT_BUTTON) == RIGHT_BUTTON)
 		right_button_up(utils, x, y);
 	if (button < 8)
 		utils->mouse.button -= button;
@@ -58,15 +58,16 @@ int	mouse_down(int button, int x, int y, void *param)
 
 	utils = param;
 	button = int_to_bit(button);
+	printf("BUTTON:%d\n", button);
 	if ((button & 8) == 8 || (button & 16) == 16)
 		scroll_wheel(utils, x, y);
 	if ((button & 8) == 8)
 		scroll_wheel_up(utils, x, y);
 	if ((button & 16) == 16)
 		scroll_wheel_down(utils, x, y);
-	if ((button & 1) == 1)
+	if ((button & LEFT_BUTTON) == LEFT_BUTTON)
 		left_button_down(utils, x, y);
-	if ((button & 2) == 2)
+	if ((button & RIGHT_BUTTON) == RIGHT_BUTTON)
 		right_button_down(utils, x, y);
 	if (button < 8)
 		utils->mouse.button += button;
