@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:03:53 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 10:39:35 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 11:52:07 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	render_map(t_utils *u, u_int8_t **map, size_t line_len, size_t lines)
 	size_t	map_coords[2];
 
 	i[0] = 0;
-	x_scale = (double)line_len / (double)u->curr_img->dim.width;
-	y_scale = (double)lines / (double)u->curr_img->dim.height;
+	x_scale = (double)line_len / ((double)u->curr_img->dim.width);
+	y_scale = (double)lines / ((double)u->curr_img->dim.height);
 	while (i[0] < u->curr_img->dim.height - 1)
 	{
 		i[1] = 0;
@@ -29,7 +29,7 @@ void	render_map(t_utils *u, u_int8_t **map, size_t line_len, size_t lines)
 		{
 			map_coords[0] = (size_t)((double)i[1] * x_scale);
 			map_coords[1] = (size_t)((double)i[0] * y_scale);
-			if (map_coords[0] < line_len - 1 && map_coords[1] < lines - 1 && (map[map_coords[1]][map_coords[0]] & 1) == 1)
+			if (map_coords[0] < line_len && map_coords[1] < lines && (map[map_coords[1]][map_coords[0]] & 1) == 1)
 				ft_pixel_put((int)i[1], (int)i[0], 0xFFFFFF,
 					(void *)u->curr_img);
 			i[1]++;
