@@ -6,7 +6,7 @@
 /*   By: dmalesev <dmalesev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:01:42 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 10:46:47 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:22:09 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	key_down(int key, void *param)
 	t_utils	*utils;
 
 	utils = param;
-	printf("KEY: %d\n", key);
 	if (key == ESC)
 		close_prog(utils, "Exited program succesfully using ESC.", 1);
 	if (key == SPACE)

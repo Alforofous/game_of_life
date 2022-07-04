@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:30 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/28 18:10:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/07/04 16:16:40 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "dm_2d.h"
+# include <time.h>
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
@@ -66,20 +67,22 @@ typedef struct s_mouse
 
 typedef struct s_utils
 {
-	void		*mlx;
-	void		*win;
-	int			tick;
-	int			speed;
-	int			state;
-	int			pause;
-	int			slider_button;
-	uint8_t	**map;
-	size_t		line_len;
-	size_t		lines;
-	t_mouse		mouse;
-	t_img		img;
-	t_img		img2;
-	t_img		*curr_img;
+	void			*mlx;
+	void			*win;
+	int				tick;
+	struct timespec	time;
+	long int		elapsed_time;
+	int				speed;
+	int				state;
+	int				pause;
+	int				slider_button;
+	uint8_t			**map;
+	size_t			line_len;
+	size_t			lines;
+	t_mouse			mouse;
+	t_img			img;
+	t_img			img2;
+	t_img			*curr_img;
 }				t_utils;
 
 typedef struct s_4i

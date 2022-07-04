@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:03:53 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/07/04 11:52:07 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:19:12 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,10 @@ static void	image_processing(t_utils *utils, t_img *img)
 
 void	render_screen(t_utils *utils)
 {
+	char str[4];
+
+	snprintf(str, 4, "%d", utils->speed);
 	image_processing(utils, &utils->img);
+	mlx_string_put(utils->mlx, utils->win, 10, 10, 0xFFFFFF, "GPS:");
+	mlx_string_put(utils->mlx, utils->win, 100, 10, 0xFFFFFF, str);
 }

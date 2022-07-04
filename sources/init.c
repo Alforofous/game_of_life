@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:59:37 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 10:44:39 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:47:31 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	init_values(t_utils *utils)
 	utils->state = 1;
 	utils->pause = -1;
 	utils->speed = 10;
+	utils->elapsed_time = 0;
+	clock_gettime(CLOCK_MONOTONIC, &utils->time);
 }
 
 static void	init_mouse(t_utils *utils)

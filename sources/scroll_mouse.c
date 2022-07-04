@@ -6,7 +6,7 @@
 /*   By: dmalesev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:52:22 by dmalesev          #+#    #+#             */
-/*   Updated: 2022/06/27 14:04:45 by dmalesev         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:05:40 by dmalesev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	scroll_wheel(t_utils *u, int x, int y)
 	u += 0;
 	x += 0;
 	y += 0;
-	printf("Speed: %d\n", u->speed);
 }
 
 void	scroll_wheel_up(t_utils *u, int x, int y)

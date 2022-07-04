@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 10:21:38 by dmalesev          #+#    #+#              #
-#    Updated: 2022/07/04 11:42:30 by dmalesev         ###   ########.fr        #
+#    Updated: 2022/07/04 15:08:50 by dmalesev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,9 +111,9 @@ OBJECTS_GI	= $(addprefix $(OBJECTS_GI_DIRECTORY), $(OBJECTS_GI_LIST))
 
 INCLUDES = -I$(HEADERS_DIRECTORY) -I./minilibx/ -I$(DM_2D_HEADERS)
 
-ASSERT_SLOW_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(YELLOW)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
-ASSERT_GI_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(VIOLET)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
+ASSERT_SLOW_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(YELLOW)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n"
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n"
+ASSERT_GI_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(VIOLET)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n"
 
 all: $(NAME_SLOW) $(NAME) $(NAME_GI)
 
