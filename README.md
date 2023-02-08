@@ -44,8 +44,12 @@ $ ./life states/tests/diehard 1000
 the last locations of the cells after 1000 iterations will be printed out.
 
 ## Optimization
-Our biggest optimization was to stop the iteration if we notice that the same patterns repeat themselves. There is a pattern called Blinkers with just two different patterns that will repeat and many maps get to that point after a while. We check that with the help of bitwise operations and will turn on specific bits to check if the cell is alive or dead and what the previous stage was. We also use it for knowing what the upcoming state will be when we check the neibours of the cells. (look at the file game_of_life/sources/iterate_opti.c that file and game_of_life/sources/game_of_life.c does all the action)
-The file game_of_life/sources/iterate_slow.c will have less operations and will be faster on maps that will continue to the end of the iterations you ask for. To compile that use:
+Our biggest optimization was to stop the iteration if there is a circular pattern in our world. There is for example a pattern called Blinkers with just two different states. Decent ammount of maps eventually arive to this point after a while. We use bitwise operations to check that. Turning on specific bits will check if the cell is alive or dead and what was the previous state of the cell. We also use it to predict the upcoming state of the cell when we check the neighbours of the cells. (look at the file game_of_life/sources/iterate_opti.c that file and game_of_life/sources/game_of_life.c run our game of life world)
+The file game_of_life/sources/iterate_slow.c does not have aforementioned optimizations, but it will be faster on maps that do not reach blinking stage. To compile, use:
+
+```
+$ make
+```
 
 Usage:
 ```
